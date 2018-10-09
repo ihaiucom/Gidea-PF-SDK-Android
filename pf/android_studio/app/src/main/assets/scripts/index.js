@@ -62,10 +62,10 @@ function initFreeType() {
                     if (!fs_exists(sTempFontPath)) {
                         fs_mkdir(sTempFontPath);
                     }
-                    sTempFontPath += "layabox.ttf";
+                    sTempFontPath += "fzltzh.ttf";
                     bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
                     if (bRet == false) {
-                        assetFontData = conch.readFileFromAsset('font/layabox.ttf', 'raw');
+                        assetFontData = conch.readFileFromAsset('font/fzltzh.ttf', 'raw');
                         if (assetFontData) {
                             fs_writeFileSync(sTempFontPath, assetFontData);
                             bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
@@ -340,9 +340,13 @@ function loadUrl(url) {
                 case 0:
                     if (url === 'http://stand.alone.version/index.html')
                         _inline = false;
-                    if (!_inline) {
-                        url = 'http://stand.alone.version/index.html';
-                    }
+//                    if (!_inline) {
+//                        url = 'http://stand.alone.version/index.html';
+//                    }
+                           // TODO ZF
+                           _inline = false;
+                           conchConfig.localizable = true;
+
                     console.log("loadURL:" + url);
                     if (history.length <= 0) {
                         history._push(url);
