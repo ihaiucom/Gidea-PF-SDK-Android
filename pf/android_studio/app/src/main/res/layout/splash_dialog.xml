@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:id="@+id/layout">
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/logoView"
@@ -12,21 +13,21 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_margin="0dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
-        android:maxHeight="200dp"
-        android:maxWidth="200dp"
+        android:padding="0dp"
         android:src="@drawable/layabox"
         android:visibility="visible"
-        tools:scaleType="fitCenter" />
+        tools:scaleType="fitXY" />
 
     <TextView
-        android:text=""
+        android:id="@+id/tipsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="68dp"
-        android:id="@+id/tipsView" />
+        android:text="" />
 
 </RelativeLayout>

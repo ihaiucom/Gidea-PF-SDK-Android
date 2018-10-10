@@ -62,15 +62,26 @@ function initFreeType() {
                     if (!fs_exists(sTempFontPath)) {
                         fs_mkdir(sTempFontPath);
                     }
-                    sTempFontPath += "fzltzh.ttf";
+
+                    var lang = window.localStorage.getItem("_lang");
+                    if(!lang)
+                    {
+                        lang = "en";
+                    }
+
+                    window.localStorage.setItem("fontSetting", lang);
+                    sTempFontPath += ( lang == "zh_cn" ? "fzctht.ttf" : "fzzyjt.ttf");
                     bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
                     if (bRet == false) {
-                        assetFontData = conch.readFileFromAsset('font/fzltzh.ttf', 'raw');
+                        assetFontData = conch.readFileFromAsset( lang == "zh_cn" ? "font/fzctht.ttf" : 'font/fzzyjt.ttf', 'raw');
                         if (assetFontData) {
                             fs_writeFileSync(sTempFontPath, assetFontData);
                             bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
                         }
                     }
+
+
+
                     if (!bRet) {
                         if (sOS == "Conch-window") {
                             bRet = conch.initFreeTypeDefaultFontFromFile("C:/Windows/Fonts/simhei.ttf");
