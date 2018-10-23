@@ -39,8 +39,10 @@ public class RuntimeProxy implements IPluginRuntimeProxy {
     }
     public String getExpansionMainPath()
     {
+        String path = mActivity.getExternalFilesDir(null).getPath();
+        Log.d(TAG, "getExternalFilesDir= " + path);
         //TODO CP自行定制
-        return "";
+        return path + "/cache.zip";
     }
     public String getExpansionPatchPath()
     {

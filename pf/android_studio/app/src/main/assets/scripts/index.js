@@ -62,23 +62,29 @@ function initFreeType() {
                     if (!fs_exists(sTempFontPath)) {
                         fs_mkdir(sTempFontPath);
                     }
-
-                    var lang = window.localStorage.getItem("_lang");
-                    if(!lang)
-                    {
-                        lang = "en";
-                    }
+                    
+  
+                    // var lang = window.localStorage.getItem("_lang");
+                    // if(!lang)
+                    // {
+                    //     lang = "en";
+                    // }
+                    var lang = "en";
 
                     window.localStorage.setItem("fontSetting", lang);
+
                     sTempFontPath += ( lang == "zh_cn" ? "fzctht.ttf" : "fzzyjt.ttf");
                     bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
                     if (bRet == false) {
-                        assetFontData = conch.readFileFromAsset( lang == "zh_cn" ? "font/fzctht.ttf" : 'font/fzzyjt.ttf', 'raw');
+                        assetFontData = conch.readFileFromAsset( lang == "zh_cn" ? "font/fzctht.ttf" : "font/fzzyjt.ttf", 'raw');
                         if (assetFontData) {
                             fs_writeFileSync(sTempFontPath, assetFontData);
                             bRet = conch.initFreeTypeDefaultFontFromFile(sTempFontPath);
                         }
                     }
+
+                    console.log("lang=" + lang);
+                    console.log("fontSetting=" + (lang == "zh_cn" ? "fzctht.ttf" : "fzzyjt.ttf"));
 
 
 
@@ -357,7 +363,7 @@ function loadUrl(url) {
                            // TODO ZF
                            _inline = false;
                            conchConfig.localizable = true;
-
+                           
                     console.log("loadURL:" + url);
                     if (history.length <= 0) {
                         history._push(url);
@@ -421,7 +427,7 @@ function loadUrl(url) {
                         initHtml(data);
                     }
                     if (window["loadingView"] && window["loadingView"].loadingAutoClose) {
-                        window["loadingView"].hideLoadingView();
+//                        window["loadingView"].hideLoadingView();
                     }
                     return [2 /*return*/];
             }
@@ -486,4 +492,17 @@ window['updateByZip'] = function (url, onEvent, onEnd) {
         }
     }, 10, 100000000);
 };
-loadUrl(conch.presetUrl || "http://runtime.layabox.com/layaplayer/index.html");
+
+//loadUrl(conch.presetUrl||"https://cdn-mv-release.shinezone.com/resources/ios/web/index.html");
+
+// loadUrl(conch.presetUrl||"http://stand.alone.version/index.html");
+
+window.appSetting = {
+    url:"https://cdn-mv-release.shinezone.com/resources/android/web/index.html",
+    //url:"http://mbqb.ihaiu.com/Gidea-PF-Res/resources/android/web/index.html",
+    appId: "com.shinezone.movie",
+    enableVersion: false
+};
+
+loadUrl(conch.presetUrl||window.appSetting.url);
+
