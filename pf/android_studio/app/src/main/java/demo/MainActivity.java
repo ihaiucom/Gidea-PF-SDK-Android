@@ -1,20 +1,18 @@
 package demo;
 import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Map;
+
 import layaair.autoupdateversion.AutoUpdateAPK;
 import layaair.game.IMarket.IPlugin;
 import layaair.game.IMarket.IPluginRuntimeProxy;
 import layaair.game.Market.GameEngine;
 import layaair.game.config.config;
-import com.shinezone.movie.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +20,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.webkit.ValueCallback;
-import android.widget.Button;
-import android.widget.Toast;
+
+import com.appsflyer.AppsFlyerConversionListener;
+import com.appsflyer.AppsFlyerLib;
+import com.layabox.movie.OcNativeClass;
 
 
 public class MainActivity extends Activity{
@@ -35,9 +34,44 @@ public class MainActivity extends Activity{
     boolean isLoad=false;
     boolean isExit=false;
     public static SplashDialog mSplashDialog;
+    // appsFlyer key
+    private static final String AF_DEV_KEY = "Tm6NpyjCqyyJUHXKMDvewJ";
     @Override    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+        // 初始化appsflyer SDK开始
+
+        AppsFlyerConversionListener conversionDataListener = new AppsFlyerConversionListener() {
+            @Override
+            public void onInstallConversionDataLoaded(Map<String, String> map) {
+
+            }
+
+            @Override
+            public void onInstallConversionFailure(String s) {
+
+            }
+
+            @Override
+            public void onAppOpenAttribution(Map<String, String> map) {
+
+            }
+
+            @Override
+            public void onAttributionFailure(String s) {
+
+            }
+        };
+        AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionDataListener, getApplicationContext());
+        AppsFlyerLib.getInstance().startTracking(getApplication());
+        OcNativeClass.context = getApplicationContext();
+        // 初始化appsflyer SDK结束
+
+
+
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         JSBridge.mMainActivity = this;
