@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn cn.testin.analysis.**
+-keep class cn.testin.analysis.** {*;}
+
+-keep public class * extends android.content.ContentProvider
+-keepnames class * extends android.view.View

@@ -22,9 +22,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
 
+// appsflyer
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.layabox.movie.OcNativeClass;
+
+// testin
+import cn.testin.analysis.data.TestinDataApi;
+import cn.testin.analysis.data.TestinDataConfig;
+import android.view.MotionEvent;
+import cn.testin.analysis.bug.BugOutApi;
 
 
 public class MainActivity extends Activity{
@@ -39,6 +46,18 @@ public class MainActivity extends Activity{
     @Override    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 初始化 Testin
+        //设置启动参数
+        TestinDataConfig testinDataConfig = new TestinDataConfig()
+                .openShake(true)//设置是否打开摇一摇反馈bug功能
+                .collectCrash(true)//设置是否收集app崩溃信息
+                .collectANR(true)//设置是否收集ANR异常信息
+                .collectLogCat(false)//设置是否收集logcat系统日志
+                .setScreenshot(true)//设置是否开启崩溃截图功能
+                .collectUserSteps(true);//设置是否收集用户操作步骤
+        //SDK初始化
+        TestinDataApi.init(this, "1a20b61e9cb75fe554ccd436b7cd9d38", testinDataConfig);
 
 
 
@@ -183,13 +202,26 @@ public class MainActivity extends Activity{
     {
         super.onPause();
         if(isLoad)mPlugin.game_plugin_onPause();
+
+        //注：回调 2
+        BugOutApi.onPause(this);
     }
     //------------------------------------------------------------------------------
     protected void onResume()
     {
         super.onResume();
         if(isLoad)mPlugin.game_plugin_onResume();
+
+        //注：回调 1
+        BugOutApi.onResume(this);
         
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        //注：回调 3
+        BugOutApi.onDispatchTouchEvent(this, ev);
+        return super.dispatchTouchEvent(ev);
     }
     
     protected void onDestroy()
