@@ -1,7 +1,7 @@
-package com.layabox.movie;
+package com.shinezone.movie;
 
 import android.content.Context;
-import android.util.Log;
+
 import com.appsflyer.*;
 
 import java.util.HashMap;

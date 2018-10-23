@@ -91,16 +91,27 @@ var GameApplication = (function(){
     function GameApplication() 
     {
         this.sOS = conchConfig.getOS();
-        if (this.sOS == "Conch-ios")
+        this.isAndroid = this.sOS  == "Conch-android";
+        this.isIos =  this.sOS  == "Conch-ios";
+
+        if ( this.isIos)
         {
             this.BridgeClass = PlatformClass.createClass("GameApplication");
             this.bridge = this.BridgeClass.newObject(); 
         }
-        else if (this.sOS == "Conch-android") 
+        else if ( this.isAndroid )
         {
-            this.BridgeClass = PlatformClass.createClass("GameApplication");
-            this.bridge = this.BridgeClass.newObject(); 
+            this.BridgeClass = PlatformClass.createClass("com.shinezone.movie.GameApplication");
+            this.bridge = this.BridgeClass.newObject();
+
+
+            var __this = this;
+            window.onerror = function(message, filename, lineno, colno, e){
+                __this.reportException(message, filename, lineno, colno, e);
+            };
+
         }
+
 
     }
 
@@ -114,7 +125,11 @@ var GameApplication = (function(){
             this.getIDFA();
             this.getIDFV();
             this.getBundleIdentifier();
-            this.checkNetwork();
+
+            if(this.isIos)
+            {
+                this.checkNetwork();
+            }
         }
     };
 
@@ -129,6 +144,7 @@ var GameApplication = (function(){
 
                     console.log("gameApplication.IDFA = " + uid);
                     __this.IDFA = uid;
+
                 },
                 "getIDFA");
         }
@@ -182,7 +198,15 @@ var GameApplication = (function(){
     {
         if (this.bridge) 
         {
-            this.bridge.call("openURL:", url);
+            var  sOS = conchConfig.getOS();
+            if(sOS == "Conch-android")
+            {
+                this.bridge.call("openURL", url);
+            }
+            else
+            {
+                this.bridge.call("openURL:", url);
+            }
         }
     };
 
@@ -190,17 +214,49 @@ var GameApplication = (function(){
 
     GameApplication.prototype.checkNetwork = function (url) 
     {
-//        var __this = this;
-//        if (this.bridge)
-//        {
-//            this.bridge.callWithBack(
-//                function(state)
-//                {
-//                    __this.networkEnable = state == "1";
-//                },
-//                "checkNetwork");
-//        }
+        var __this = this;
+        if (this.bridge) 
+        {
+            this.bridge.callWithBack(
+                function(state)
+                {
+                    __this.networkEnable = state == "1";
+                },
+                "checkNetwork");
+        }
     };
+
+
+    GameApplication.prototype.reportException = function (message, filename, lineno, colno, e)
+    {
+        if(this.isAndroid)
+        {
+            if (this.bridge)
+            {
+                var txt = "";
+                if(message) txt += message + "\n";
+                if(filename) txt += filename + "\n";
+                if(lineno) txt += lineno + "\n";
+                if(colno) txt += colno + "\n";
+                txt += e.stack + "\n";
+                this.bridge.call("reportException", txt);
+            }
+        }
+    };
+
+
+    GameApplication.prototype.setUserInfo = function (username, name)
+    {
+        if(this.isAndroid)
+        {
+            if (this.bridge)
+            {
+                this.bridge.call("setUserInfo", username, name);
+            }
+        }
+    };
+
+
                        
                        
                        

@@ -25,7 +25,8 @@ import android.webkit.ValueCallback;
 // appsflyer
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
-import com.layabox.movie.OcNativeClass;
+import com.shinezone.movie.GameApplication;
+import com.shinezone.movie.OcNativeClass;
 
 // testin
 import cn.testin.analysis.data.TestinDataApi;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity{
     @Override    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         // 初始化 Testin
         //设置启动参数
@@ -90,6 +92,8 @@ public class MainActivity extends Activity{
         // 初始化appsflyer SDK结束
 
 
+        // 初始化 GameApplication
+        GameApplication.getInstance().init(this);
 
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -109,7 +113,7 @@ public class MainActivity extends Activity{
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
         mPlugin.game_plugin_set_option("gameUrl", "https://cdn-mv-release.shinezone.com/resources/android/web/index.html");
-        mPlugin.game_plugin_init(3);
+        mPlugin.game_plugin_init(6);
         View gameView = mPlugin.game_plugin_get_view();
         this.setContentView(gameView);
         isLoad=true;
@@ -201,6 +205,7 @@ public class MainActivity extends Activity{
     protected void onPause()
     {
         super.onPause();
+        GameApplication.getInstance().applicationWillResignActive();
         if(isLoad)mPlugin.game_plugin_onPause();
 
         //注：回调 2
@@ -210,11 +215,11 @@ public class MainActivity extends Activity{
     protected void onResume()
     {
         super.onResume();
+        GameApplication.getInstance().applicationDidBecomeActive();
         if(isLoad)mPlugin.game_plugin_onResume();
 
         //注：回调 1
         BugOutApi.onResume(this);
-        
     }
 
     @Override
@@ -227,6 +232,7 @@ public class MainActivity extends Activity{
     protected void onDestroy()
     {
         super.onDestroy();
+        GameApplication.getInstance().applicationWillTerminate();
         if(isLoad)mPlugin.game_plugin_onDestory();
     }
     
