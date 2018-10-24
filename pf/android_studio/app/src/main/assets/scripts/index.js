@@ -360,9 +360,13 @@ function loadUrl(url) {
 //                    if (!_inline) {
 //                        url = 'http://stand.alone.version/index.html';
 //                    }
-                           // TODO ZF
-                           // _inline = false;
-                           // conchConfig.localizable = true;
+
+                       // TODO ZF
+                       if(!window.appSetting.isDebug)
+                       {
+                            _inline = false;
+                            conchConfig.localizable = true;
+                       }
                            
                     console.log("loadURL:" + url);
                     if (history.length <= 0) {
@@ -498,11 +502,34 @@ window['updateByZip'] = function (url, onEvent, onEnd) {
 // loadUrl(conch.presetUrl||"http://stand.alone.version/index.html");
 
 window.appSetting = {
-    //url:"https://cdn-mv-release.shinezone.com/resources/ios/web/index.html",
-    url:"http://mbqb.ihaiu.com/Gidea-PF-Res/resources/ios/web/index.html",
+    url:"https://cdn-mv-release.shinezone.com/resources/android/web/index.html",
     appId: "com.shinezone.movie",
-    enableVersion: false
+    enableVersion: true,
+    isDebug: false
 };
+
+if(conchConfig.getOS() == "Conch-android")
+{
+    if(window.appSetting.isDebug)
+    {
+        window.appSetting.url = "http://mbqb.ihaiu.com/Gidea-PF-Res/resources/android/web/index.html";
+    }
+    else
+    {
+        window.appSetting.url = "https://cdn-mv-release.shinezone.com/resources/android/web/index.html";
+    }
+}
+else
+{
+    if(window.appSetting.isDebug)
+    {
+        window.appSetting.url = "http://mbqb.ihaiu.com/Gidea-PF-Res/resources/ios/web/index.html";
+    }
+    else
+    {
+        window.appSetting.url = "https://cdn-mv-release.shinezone.com/resources/ios/web/index.html";
+    }
+}
 
 loadUrl(window.appSetting.url);
 
