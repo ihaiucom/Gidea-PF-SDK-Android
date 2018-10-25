@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.shinezone.movie"
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 29
         versionName "1.29.00"
     }

@@ -113,7 +113,7 @@ public class MainActivity extends Activity{
         mPlugin.game_plugin_set_runtime_proxy(mProxy);
         mPlugin.game_plugin_set_option("localize","false");
         mPlugin.game_plugin_set_option("gameUrl", "https://cdn-mv-release.shinezone.com/resources/android/web/index.html");
-        mPlugin.game_plugin_init(6);
+        mPlugin.game_plugin_init(3);
         View gameView = mPlugin.game_plugin_get_view();
         this.setContentView(gameView);
         isLoad=true;
