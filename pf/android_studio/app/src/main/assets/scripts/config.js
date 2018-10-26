@@ -130,6 +130,10 @@ var GameApplication = (function(){
             {
                 this.checkNetwork();
             }
+            else
+            {
+                this.getAppVersionName();
+            }
         }
     };
 
@@ -180,6 +184,22 @@ var GameApplication = (function(){
                     console.log("getBundleIdentifier window.appSetting.appId=" + window.appSetting.appId);
                 },
                 "getBundleIdentifier");
+        }
+    };
+
+
+    GameApplication.prototype.getAppVersionName = function ()
+    {
+        var __this = this;
+        if (this.bridge)
+        {
+            this.bridge.callWithBack(
+                function(uid)
+                {
+                    __this.AppVersionName = uid;
+                    console.log("getAppVersionName AppVersionName=" + __this.AppVersionName);
+                },
+                "getAppVersionName");
         }
     };
 

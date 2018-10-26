@@ -242,12 +242,12 @@ public class MainActivity extends Activity{
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void setContentView(View view) {
-        super.setContentView(view);
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.systemUiVisibility =View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        getWindow().setAttributes(params);
-    }
+//    @Override
+//    public void setContentView(View view) {
+//        super.setContentView(view);
+//
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.systemUiVisibility =View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+//        getWindow().setAttributes(params);
+//    }
 }

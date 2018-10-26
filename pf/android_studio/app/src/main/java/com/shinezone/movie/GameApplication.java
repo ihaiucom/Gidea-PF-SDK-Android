@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,6 +137,27 @@ public class GameApplication
         }
         return "";
     }
+
+    public String getAppVersionName()
+    {
+        String versionName = "";
+        try {
+            // ---get the package info---
+            PackageManager pm = activity.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(activity.getPackageName(), 0);
+            versionName = pi.versionName;
+            if (versionName == null || versionName.length() <= 0) {
+                return "";
+            }
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+
+        ExportJavaFunction.CallBackToJS(this,"getAppVersionName",versionName);
+        return versionName;
+    }
+
+
 
 
     /////////////////////////////////////
