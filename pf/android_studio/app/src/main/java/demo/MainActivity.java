@@ -52,12 +52,12 @@ public class MainActivity extends Activity{
         // 初始化 Testin
         //设置启动参数
         TestinDataConfig testinDataConfig = new TestinDataConfig()
-                .openShake(true)//设置是否打开摇一摇反馈bug功能
+                .openShake(false)//设置是否打开摇一摇反馈bug功能
                 .collectCrash(true)//设置是否收集app崩溃信息
                 .collectANR(true)//设置是否收集ANR异常信息
                 .collectLogCat(false)//设置是否收集logcat系统日志
                 .setScreenshot(true)//设置是否开启崩溃截图功能
-                .collectUserSteps(true);//设置是否收集用户操作步骤
+                .collectUserSteps(false);//设置是否收集用户操作步骤
         //SDK初始化
         TestinDataApi.init(this, "1a20b61e9cb75fe554ccd436b7cd9d38", testinDataConfig);
 
