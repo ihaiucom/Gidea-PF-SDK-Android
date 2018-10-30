@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shinezone.movie"
-    android:versionCode="3200"
-    android:versionName="1.32.00" >
+    android:versionCode="3301"
+    android:versionName="1.33.01" >
 
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />

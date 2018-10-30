@@ -9,8 +9,8 @@ android {
         applicationId "com.shinezone.movie"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 3200
-        versionName "1.32.00"
+        versionCode 3301
+        versionName "1.33.01"
     }
     sourceSets.main{
         jniLibs.srcDir 'libs'
