@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.shinezone.movie.R;
+import com.shinezone.movie.test.R;
 
 import layaair.game.browser.ConchJNI;
 

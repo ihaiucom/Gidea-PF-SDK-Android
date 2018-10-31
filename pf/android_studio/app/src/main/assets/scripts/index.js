@@ -503,7 +503,7 @@ window['updateByZip'] = function (url, onEvent, onEnd) {
 
 window.appSetting = {
     url:"https://cdn-mv-release.shinezone.com/resources/android/web/index.html",
-    appId: "com.shinezone.movie",
+    appId: "com.shinezone.movie.test",
     enableVersion: true,
     isDebug: false
 };

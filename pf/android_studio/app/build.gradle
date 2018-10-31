@@ -6,11 +6,11 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.shinezone.movie"
+        applicationId "com.shinezone.movie.test"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 3301
-        versionName "1.33.01"
+        versionCode 3300
+        versionName "1.33.00"
     }
     sourceSets.main{
         jniLibs.srcDir 'libs'
