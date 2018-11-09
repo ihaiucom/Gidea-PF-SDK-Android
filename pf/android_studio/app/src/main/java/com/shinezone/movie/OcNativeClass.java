@@ -7,6 +7,8 @@ import com.appsflyer.*;
 import java.util.HashMap;
 import java.util.Map;
 
+// Appsflyer SDK Version:  4.8.15 (Release Notes)
+
 public class OcNativeClass {
     public  static Context context;
     public  static void OcNativeClass(){}
