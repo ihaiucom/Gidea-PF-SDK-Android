@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Movie Inc.</string>
-    <string name="on_back_pressed">再次点击后退键退出游戏!</string>
-    <string name="alert_dialog_title">提示</string>
+    <string name="on_back_pressed">Tap Back button again to exit game!</string>
+    <string name="alert_dialog_title">Notice</string>
 </resources>

@@ -414,7 +414,7 @@ function loadUrl(url) {
                     if (!data) {
                         if (window["loadingView"]) {
                             window["loadingView"].setFontColor("#FF0000");
-                            window["loadingView"].setTips(['网络异常，请检查您的网络或与开发商联系。']);
+                            window["loadingView"].setTips(['Connection lost, please check your network or contact developer.']);
                         }
                         data = cache.loadCachedURL(url);
                         if (!data || data.length <= 0)
