@@ -379,3 +379,19 @@ window.onLayaInitError=function(e)
 	console.log("onLayaInitError error=" + e);
 	alert("Game loading failed, possibly due to connection lost, please exit game and try again");
 }
+
+
+//控制显存
+var nMem = conchConfig.getTotalMem();
+if (nMem <= 524288) {
+    conchConfig.maxTextureMemSize = 80 * 1024 * 1024;
+}
+else if (nMem > 524288 && nMem <= 1048576) {
+    conchConfig.maxTextureMemSize = 128 * 1024 * 1024;
+}
+else if (nMem > 1048576) {
+    conchConfig.maxTextureMemSize = 200 * 1024 * 1024;
+}
+
+
+conchConfig.maxTextureMemSize = 200 * 1024 * 1024;

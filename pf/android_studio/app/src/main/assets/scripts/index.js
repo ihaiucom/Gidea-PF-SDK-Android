@@ -505,7 +505,7 @@ window.appSetting = {
     url:"https://cdn-mv-release.shinezone.com/resources/android/web/index.html",
     appId: "com.shinezone.movie.test",
     enableVersion: true,
-    isDebug: false
+    isDebug: true
 };
 
 if(conchConfig.getOS() == "Conch-android")
